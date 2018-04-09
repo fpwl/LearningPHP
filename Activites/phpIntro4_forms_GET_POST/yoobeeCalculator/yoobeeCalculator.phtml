@@ -1,0 +1,114 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>forms_GET_POST</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+    <body>
+        <?php
+            // php stuff to display the date/greeting in html
+            $currentTime = date("g:i a");
+            $dayOfTheWeek = date("l");
+            $currentDate = date("jS F y-m-d");
+
+            $hour = date("g");
+            $minute = date("i");
+            $amOrpm = date("a");
+
+            if(($hour >= 5 && $amOrpm === "am") && ($hour <= 11 && $minute <= 59 && $amOrpm === "am")) {
+                $goodGreeting = "GOOD MORNING!!!";
+            } elseif(($hour == 12  && $minutes <= 59 && $amOrpm === "pm") || (($hour >= 1 && $amOrpm === "pm") && ($hour <= 4 && $minute <= 59 && $amOrpm === "pm"))){
+                $goodGreeting =  "GOOD AFTERNOON!!!";
+            }
+            elseif(($hour >= 5 && $amOrpm === "pm") && ($hour <= 7 && $minute <= 59 && $amOrpm === "pm")){
+                $goodGreeting =  "GOOD EVENING!!!";
+            }
+            elseif(($hour >= 8 && $amOrpm === "pm") && ($hour <= 11 && $minute <= 59 && $amOrpm === "pm")){
+                $goodGreeting = "GOOD NIGHT!!!";
+            }
+            elseif(($hour == 12  && $minutes <= 59 && $amOrpm === "am") || (($hour >= 1 && $amOrpm === "am") && ($hour <= 4 && $minute <= 59 && $amOrpm === "am"))){
+                $goodGreeting = "WHY ARE YOU AWAKE!!!!!";
+            }
+
+            $calculatorGreeting = $goodGreeting . " It is " . $currentTime . ", " . $dayOfTheWeek . ", " . "the " . $currentDate;
+
+            // Form php POST Stuff
+            $shapeChoosen = $_POST["shapeChosen"];
+            $radius = $_POST["circleRadius"];
+            $squareSize = $_POST["squareSize"];
+            $rectHeight = $_POST["rectangleHeight"];
+            $rectWidth = $_POST["rectangleWidth"];
+
+            if ($shapeChoosen == "circle") {
+                $diameter = 2 * $radius;
+                $circleArea = 3.14 * ($radius * $radius);
+                $circumference = 2 * (3.14 * $radius);
+
+                $shapeResults = "<br>The diameter of the Circle is " . $diameter . "<br>The area of the Circle is " . $circleArea . "<br>The circumference of the Circle is " . $circumference;
+            } elseif ($shapeChoosen == "square") {
+                $squareArea = $squareSize * $squareSize;
+                $squarePerimeter = 4 * $squareSize;
+
+                $shapeResults = "<br>The area of the Square is " . $squareArea . "<br>The perimeter of the Square is " . $squarePerimeter;
+            } elseif ($shapeChoosen == "rectangle") {
+                $rectangleArea = $rectHeight * $rectWidth;
+                $rectanglePerimeter = 2 * $rectangleArea;
+
+                $shapeResults =  "<br>The area of the Rectangle is " . $rectangleArea . "<br>The perimeter of the Rectangle is " . $rectanglePerimeter;
+            }
+
+            $shapeCalculatedResults = $shapeResults;
+        ?>
+
+        <div id="calculatorContainer">
+            <h1 id="calculatorHeader">YOOBEE'S CALCULATOR</h1>
+            <div id="greetingWrapper">
+                <h4 id="greetingContent"><?php echo $calculatorGreeting; ?></h4>
+            </div>
+
+            <div>
+                <p>Please choose the shape for which you want to calculate properties:</p>
+                <input type="hidden" name="shape" value="" checked>
+                <label for="circle">Circle</label>
+                <input type="radio" onchange="shapeType(this.value)" name="shape" id="circle" value="circle">
+                <label for="square">Square</label>
+                <input type="radio" onchange="shapeType(this.value)" name="shape" id="sqaure" value="square">
+                <label for="rectangle">Rectangle</label>
+                <input type="radio" onchange="shapeType(this.value)" name="shape" id="rectangle" value="rectangle">
+            </div>
+
+            <form id="circleInput" action="yoobeeCalculator.phtml" method="POST"> 
+                <label>Enter the Radius of Circle</label>
+                <input type="text" name="circleRadius" value=""/>
+                <br>
+                <input type="hidden" name="shapeChosen" value="circle">
+                <button type="submit" onclick="showResults()">Submit</button>
+            </form>
+            <form id="squareInput" action="yoobeeCalculator.phtml" method="POST"> 
+                <label>Enter the Size of the Square Sides</label>
+                <input type="text" name="squareSize" value=""/>
+                <br>
+                <input type="hidden" name="shapeChosen" value="square">
+                <button type="submit" onclick="showResults()">Submit</button>
+            </form>
+            <form id="rectangleInput" action="yoobeeCalculator.phtml" method="POST"> 
+                <label>Enter the Height of Rectangle</label>
+                <input type="text" name="rectangleHeight" value=""/>
+                <br>
+                <label>Enter the Width of Rectangle</label>
+                <input type="text" name="rectangleWidth" value=""/>
+                <br>
+                <input type="hidden" name="shapeChosen" value="rectangle">
+                <button type="submit" onclick="showResults()">Submit</button>
+            </form>
+            <br>
+
+            <div id="shapeCalculatorResults">
+                <?php echo $shapeCalculatedResults; ?>
+            </div>
+        </div>
+
+        <script src="changeForms.js"></script>
+    </body>
+</html>

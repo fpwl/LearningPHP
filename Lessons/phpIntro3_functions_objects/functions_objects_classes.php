@@ -144,8 +144,8 @@
 
                 // *Class is a key word and Student is the name of the class. Like writing a function
                 class student {
-                    public $name = "Florence"; //public means it can be accessed anywhere
-                    public static $age = 25;
+                    public $name; //public means it can be accessed anywhere
+                    public $age;
                     public static $deposit;
 
                     public $balance = 5000;
@@ -165,17 +165,17 @@
                 // Student 1 stuff
                 $student1 = new student; // This means we are creating a new 'object/class' with the student Class.
 
-                $student1 -> name = "Peter";
-                $student1 -> age = 23;
+                $student1->name = "Peter";
+                $student1->age = 23;
 
                 echo "<pre> $student1->name \t $student1->age \n </pre>";
 
                 // Student 2 stuff
                 $student2 = new student; 
 
-                $student2 -> name = "Johnny"; // Assigning "Johnny" to name. not reassigning the variable. Because...
-                $student2 -> age = 24;
-                $student2 -> height = 178; //You can add another new variable with -> *name* = #
+                $student2->name = "Johnny"; // Assigning "Johnny" to name. not reassigning the variable. Because...
+                $student2->age = 24;
+                $student2->height = 178; //You can add another new variable with -> *name* = #
 
                 echo "<pre> $student2->name \t $student2->age \n </pre>";
 

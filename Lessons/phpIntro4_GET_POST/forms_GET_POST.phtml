@@ -1,0 +1,69 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>forms_GET_POST</title>
+</head>
+    <body>
+        <!-- basic html form with a POST method -->
+        
+        <!-- action: link to the php file, method: post (so php section can retrive the data?)  -->
+        <form action="forms_GET_POST.phtml" method="post">
+            <div>
+                Title:
+                <select name="nameTitle">
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Ms">Ms</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Dr">Dr</option>
+                    <option value="Sir">Sir</option>
+                    <option value="Dr">Lady</option>
+                    
+                </select>
+                <br>
+                First Name:<input type="text" name="nameFirst" value=""/>
+                <br>
+                Last Name:<input type="text" name="nameLast" value=""/>
+                <br>
+                <button type="submit" >Post</button>
+            </div>
+
+        </form>
+
+        <?php
+            // defining variables to linking to html form input names.
+            $title = $_POST["nameTitle"];
+            $first = $_POST["nameFirst"];
+            $last = $_POST["nameLast"];
+
+            date_default_timezone_set('Etc/GMT+12'); //Get 24hour time
+            $year = date("Y");
+            $leap = date("L");  
+
+            // if else statement to determine the greeting
+            if ($time >= 5 && $time <= 11.59) {
+                echo "Good morning, $title $last.";
+
+            } elseif ($time >= 12 && $time <= 17) {
+                echo "Good Afternoon, $title $last.";
+
+            } elseif ($time >= 17.01 && $time <= 23.59) {
+                echo "Good Evening, $title $last.";
+
+            } else {
+                echo "Good Night, $title $last.";
+            }
+
+            // if it's a leap year or not
+            if ($leap == 0) {
+                echo "<br> Just wanted to let you know that this year is $year, therefore it is not a leap year";
+            }else {
+                echo "<br> Just wanted to let you know that this year is $year, therefore it is a leap year";
+            }
+
+            echo "<br><br>Many thanks, <br> $first"
+
+        ?>
+
+    </body>
+</html>
