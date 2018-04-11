@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>forms_GET_POST</title>
+    <title>Yoobee Calculator</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -45,20 +45,25 @@
                 $circleArea = 3.14 * ($radius * $radius);
                 $circumference = 2 * (3.14 * $radius);
 
-                $shapeResults = "<br>The diameter of the Circle is " . $diameter . "<br>The area of the Circle is " . $circleArea . "<br>The circumference of the Circle is " . $circumference;
+                $shapeResults = "<li>The diameter of the Circle is " . $diameter . " because the formula for the diameter is (2 x radius). </li>" . "<li>The area of the Circle is " . $circleArea . " because the formula for the area is (π x (radius x radius).</li>" . "<li>The circumference of the Circle is " . $circumference . " because the formula for the circumference is (2 x (π x radius).</li>";
+                $renderedShape = "<div style=\"border-radius:50%; width:{$diameter}px; height:{$diameter}px; background-color:#53e5ff; border: 2px solid #1f2580;\"></div>";
             } elseif ($shapeChoosen == "square") {
                 $squareArea = $squareSize * $squareSize;
                 $squarePerimeter = 4 * $squareSize;
 
-                $shapeResults = "<br>The area of the Square is " . $squareArea . "<br>The perimeter of the Square is " . $squarePerimeter;
+                $shapeResults = "The area of the Square is " . $squareArea . " because the formula for the area is (side x side). </li>" . "<br>The perimeter of the Square is " . $squarePerimeter . " because the formula for the perimeter is (4 x side). </li>";
+                $renderedShape = "<div style=\"width:{$squareSize}px; height:{$squareSize}px; background-color:#53e5ff; border: 2px solid #1f2580;\"></div>";
             } elseif ($shapeChoosen == "rectangle") {
                 $rectangleArea = $rectHeight * $rectWidth;
                 $rectanglePerimeter = 2 * $rectangleArea;
 
-                $shapeResults =  "<br>The area of the Rectangle is " . $rectangleArea . "<br>The perimeter of the Rectangle is " . $rectanglePerimeter;
+                $shapeResults =  "The area of the Rectangle is " . $rectangleArea . " because the formula for the area is (width x length). </li>" . "<br>The perimeter of the Rectangle is " . $rectanglePerimeter . " because the formula for the perimeter is (2 x ((width x length)). </li>";
+                $renderedShape = "<div style=\"width:{$rectWidth}px; height:{$rectHeight}px; background-color:#53e5ff; border: 2px solid #1f2580;\"></div>";
             }
 
             $shapeCalculatedResults = $shapeResults;
+            $shapeRender = $renderedShape;
+            
         ?>
 
         <div id="calculatorContainer">
@@ -67,15 +72,17 @@
                 <h4 id="greetingContent"><?php echo $calculatorGreeting; ?></h4>
             </div>
 
-            <div>
+            <div id="shapeOptionsWrapper"> 
                 <p>Please choose the shape for which you want to calculate properties:</p>
-                <input type="hidden" name="shape" value="" checked>
-                <label for="circle">Circle</label>
-                <input type="radio" onchange="shapeType(this.value)" name="shape" id="circle" value="circle">
-                <label for="square">Square</label>
-                <input type="radio" onchange="shapeType(this.value)" name="shape" id="sqaure" value="square">
-                <label for="rectangle">Rectangle</label>
-                <input type="radio" onchange="shapeType(this.value)" name="shape" id="rectangle" value="rectangle">
+                <div id="shapeOptions">
+                    <input type="hidden" name="shape" value="" checked>
+                    <label for="circle">Circle</label>
+                    <input type="radio" onchange="shapeType(this.value)" name="shape" id="circle" value="circle">
+                    <label for="square">Square</label>
+                    <input type="radio" onchange="shapeType(this.value)" name="shape" id="sqaure" value="square">
+                    <label for="rectangle">Rectangle</label>
+                    <input type="radio" onchange="shapeType(this.value)" name="shape" id="rectangle" value="rectangle">
+                </div>
             </div>
 
             <form id="circleInput" action="yoobeeCalculator.phtml" method="POST"> 
@@ -105,7 +112,14 @@
             <br>
 
             <div id="shapeCalculatorResults">
-                <?php echo $shapeCalculatedResults; ?>
+                <h4>Shape Properties:</h4>
+                <ul>
+                    <?php echo $shapeCalculatedResults; ?>
+                </ul>
+            </div>
+
+            <div id="shapeRenderer">
+                <?php echo $shapeRender; ?>
             </div>
         </div>
 
