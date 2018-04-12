@@ -22,6 +22,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: scroll;
 };
 .renderedShape {
     background-color: #53e5ff;
