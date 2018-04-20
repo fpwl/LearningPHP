@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="php/newCandyTable.php" method="POST">
+		<h1>Add New Candy Table</h1>
+		<hr>
+        <br>
+		<label>Candy Table Name: </label>
+		<input type="text" name="tableName" required>
+		<br><br>
+        <p>Enter the following details for the columns in the Candy table</p>
+		<label>Column 1: (i.e. Name) </label>
+		<input type="text" name="column1" required>
+		<br>
+        <label>Column 2: (i.e. Type)</label>
+		<input type="text" name="column2" required>
+		<br>
+         <label>Column 3: (i.e. Price)</label>
+		<input type="text" name="column3" required>
+		<br>
+        <label>Column 4: (i.e. No.InStock)</label>
+		<input type="text" name="column4" required>
+		<br><br>
+		<button type="submit" id="submit">Add New Table</button>
+	</form>
+</body>
+</html>
